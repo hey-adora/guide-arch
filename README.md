@@ -1,8 +1,16 @@
-# Description
+# Requirements
 
-[**FULL-DISK**](https://wiki.archlinux.org/title/GPT_fdisk) installation with [**SWAP**](https://wiki.archlinux.org/title/swap) and [**GNOME**](https://wiki.archlinux.org/title/GNOME), it includes [**wifi**](https://wiki.archlinux.org/title/iwd) and [**bluetooth**](https://wiki.archlinux.org/title/bluetooth) setup steps. With [**AMD**](https://wiki.archlinux.org/title/AMDGPU) gpu and [**EFI**](https://wiki.archlinux.org/title/GRUB) support.
+- AMD GPU
+- UEFI
+- Make sure to turn off [secure](https://www.top-password.com/blog/wp-content/uploads/2019/09/disable-secure-boot.jpg)/[fast](https://key.wpxbox.com/img/2021/04/Fastboot-UEFI-BIOS.jpg) boot in your UEFI settings.
 
-Note: Make sure to turn off [secure](https://www.top-password.com/blog/wp-content/uploads/2019/09/disable-secure-boot.jpg)/[fast](https://key.wpxbox.com/img/2021/04/Fastboot-UEFI-BIOS.jpg) boot in your uefi settings.
+# Features
+
+- EXT4
+- [Swap](https://wiki.archlinux.org/title/swap)
+- Gnome
+- [Wifi](https://wiki.archlinux.org/title/iwd) and [Bluetooth](https://wiki.archlinux.org/title/bluetooth)
+- [AMD GPU](https://wiki.archlinux.org/title/AMDGPU)
 
 # Index
 
@@ -231,15 +239,15 @@ echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 
 6. Set pc name
 ```bash
-echo "night-pc" >> /etc/hostname
+echo "angel-pc" >> /etc/hostname
 ```
->You can "night-pc" to whatever you want, but don't write special characters or spaces.
+>You can "angel-pc" to whatever you want, but don't write special characters or spaces.
 
 7. Setup host file with `nano /etc/hosts` and write in it
 ```
 127.0.0.1 localhost
 ::1       localhost
-127.0.1.1 night-pc.localdomain night-pc
+127.0.1.1 angel-pc.localdomain angel-pc
 ```
 >Then save and exit
 
@@ -275,7 +283,7 @@ systemctl enable bluetooth
 systemctl enable gdm
 ```
 
-4. Set default shell (Optional)
+4. Set default shell for root (Optional)
 ```bash
 chsh -s /bin/fish
 ```
@@ -289,13 +297,13 @@ passwd
 
 2. Create user
 ```bash
-useradd -mG wheel night
+useradd -mG wheel angel
 ```
 >You can name it whatever you want, but don't use special characters or spaces.
 
-3. Set password for night user
+3. Set password for angel user
 ```bash
-passwd night
+passwd angel
 ```
 
 4. Add sudo support for wheel group with `EDITOR=nano visudo` by uncommenting `%wheel ALL=(ALL) ALL` like this:
@@ -307,7 +315,12 @@ passwd night
 
 5. Switch to your user
 ```bash
-su night
+su angel
+```
+
+4. Set default shell for user (Optional)
+```bash
+chsh -s /bin/fish
 ```
 
 6. Go to your home folder
@@ -342,7 +355,7 @@ makepkg -si PKGBUILD
 ```bash
 umount -a
 ```
->**Errors are normal here**, continue.
+>**Errors are expected**, continue.
 
 3. Reboot
 ```bash
